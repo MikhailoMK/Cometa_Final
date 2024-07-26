@@ -1,0 +1,80 @@
+
+Recovery Manager: Release 19.0.0.0.0 - Production on Wed Jul 24 23:46:46 2024
+Version 19.3.0.0.0
+
+Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
+
+connected to target database: FINAL (DBID=348814657)
+
+RMAN> 2> 3> 4> 5> 6> 7> 
+using target database control file instead of recovery catalog
+allocated channel: ch1
+channel ch1: SID=277 device type=DISK
+
+allocated channel: ch2
+channel ch2: SID=407 device type=DISK
+
+
+Starting backup at 24-JUL-24
+current log archived
+channel ch1: starting archived log backup set
+channel ch1: specifying archived log(s) in backup set
+input archived log thread=1 sequence=5 RECID=1 STAMP=1175211887
+channel ch1: starting piece 1 at 24-JUL-24
+channel ch2: starting archived log backup set
+channel ch2: specifying archived log(s) in backup set
+input archived log thread=1 sequence=6 RECID=2 STAMP=1175212011
+channel ch2: starting piece 1 at 24-JUL-24
+channel ch2: finished piece 1 at 24-JUL-24
+piece handle=/home/oracle/RMAN_BACKUP/FINAL_5_0530ojvc_1_1.bkp tag=TAG20240724T234652 comment=NONE
+channel ch2: backup set complete, elapsed time: 00:00:03
+channel ch1: finished piece 1 at 24-JUL-24
+piece handle=/home/oracle/RMAN_BACKUP/FINAL_4_0430ojvc_1_1.bkp tag=TAG20240724T234652 comment=NONE
+channel ch1: backup set complete, elapsed time: 00:00:07
+Finished backup at 24-JUL-24
+
+Starting backup at 24-JUL-24
+channel ch1: starting full datafile backup set
+channel ch1: specifying datafile(s) in backup set
+input datafile file number=00001 name=/u01/app/oracle/oradata/FINAL/system01.dbf
+input datafile file number=00009 name=/u01/app/oracle/oradata/FINAL/admin_tablespace2.dbf
+input datafile file number=00007 name=/u01/app/oracle/oradata/FINAL/users01.dbf
+input datafile file number=00008 name=/u01/app/oracle/oradata/FINAL/reader_tablespace.dbf
+channel ch1: starting piece 1 at 24-JUL-24
+channel ch2: starting full datafile backup set
+channel ch2: specifying datafile(s) in backup set
+input datafile file number=00003 name=/u01/app/oracle/oradata/FINAL/sysaux01.dbf
+input datafile file number=00004 name=/u01/app/oracle/oradata/FINAL/undotbs01.dbf
+input datafile file number=00005 name=/u01/app/oracle/oradata/FINAL/admin_tablespace.dbf
+input datafile file number=00002 name=/u01/app/oracle/oradata/FINAL/simple_tablespace.dbf
+channel ch2: starting piece 1 at 24-JUL-24
+channel ch2: finished piece 1 at 24-JUL-24
+piece handle=/u01/app/oracle/product/19.0.0/dbhome_1/dbs/0730ojvk_1_1 tag=TAG20240724T234700 comment=NONE
+channel ch2: backup set complete, elapsed time: 00:00:25
+channel ch1: finished piece 1 at 24-JUL-24
+piece handle=/u01/app/oracle/product/19.0.0/dbhome_1/dbs/0630ojvk_1_1 tag=TAG20240724T234700 comment=NONE
+channel ch1: backup set complete, elapsed time: 00:00:46
+Finished backup at 24-JUL-24
+
+Starting backup at 24-JUL-24
+current log archived
+channel ch1: starting archived log backup set
+channel ch1: specifying archived log(s) in backup set
+input archived log thread=1 sequence=7 RECID=3 STAMP=1175212066
+channel ch1: starting piece 1 at 24-JUL-24
+channel ch1: finished piece 1 at 24-JUL-24
+piece handle=/home/oracle/RMAN_BACKUP/FINAL_8_0830ok13_1_1.bkp tag=TAG20240724T234747 comment=NONE
+channel ch1: backup set complete, elapsed time: 00:00:01
+Finished backup at 24-JUL-24
+
+Starting Control File and SPFILE Autobackup at 24-JUL-24
+piece handle=/u01/app/oracle/product/19.0.0/dbhome_1/dbs/c-348814657-20240724-01 comment=NONE
+Finished Control File and SPFILE Autobackup at 24-JUL-24
+
+released channel: ch1
+
+released channel: ch2
+
+RMAN> 
+
+Recovery Manager complete.

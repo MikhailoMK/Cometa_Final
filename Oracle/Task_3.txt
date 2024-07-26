@@ -1,0 +1,35 @@
+--Создание и заполнение таблицы для admin
+CREATE TABLE test (id INT, name VARCHAR2(50), time REAL);
+
+INSERT INTO test VALUES (1, 'Ведьмак 3: Дикая Охота', 171.2);
+INSERT INTO test VALUES (2, 'BioShock Infinitie', 15.1);
+INSERT INTO test VALUES (3, 'Borderlands 2', 81.6);
+INSERT INTO test VALUES (4, 'Darksiders 3', 39.3);
+INSERT INTO test VALUES (5, 'Deep Rock Galactic', 111.2);
+INSERT INTO test VALUES (6, 'Dota 2', 2209.1);
+INSERT INTO test VALUES (7, 'The Elder Scrolls V: Skyrim', 161.6);
+INSERT INTO test VALUES (8, 'Fallout Shelter', 104.5);
+INSERT INTO test VALUES (9, 'Metro Exodus', 25);
+INSERT INTO test VALUES (10, 'Remnant: From The Ashes', 56.7);
+
+--------------------------------------------------------------------------------------------------------------------------------
+--Создание и заполнение таблицы для simple
+CREATE TABLE people (id INT, name VARCHAR2(50));
+
+INSERT INTO people VALUES (1, 'Кузьмин Михаил');
+INSERT INTO people VALUES (2, 'Хамидов Сиёвуш');
+INSERT INTO people VALUES (3, 'Курбонов Мухаммад');
+INSERT INTO people VALUES (4, 'Косими Косим');
+
+--------------------------------------------------------------------------------------------------------------------------------
+--Создание и заполение таблицы для reader
+CREATE TABLE reader.games (id INT, name VARCHAR2(50), release_date date);
+
+INSERT INTO reader.games VALUES (1, 'Dota 2', '09-07-2013');
+INSERT INTO reader.games VALUES (2, 'TES V: Skyrim', '11-11-2011');
+INSERT INTO reader.games VALUES (3, 'Fallout 4', '10-11-2015');
+INSERT INTO reader.games VALUES (4, 'Hades', '06-12-2018');
+INSERT INTO reader.games VALUES (5, 'Metro Exodus', '15-02-2019');
+
+
+--Только для reader таблица создаётся от имени sys, так как пользователь reader не может создавать и заполнять таблицы. Остальные таблицы создаются и заполняются под своими пользователями.

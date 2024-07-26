@@ -1,0 +1,32 @@
+Для экспорта и импорта при помощи Data Pump можно использовать несколько способов:
+1) Указать всё вручную. Выглядеть это будет так:
+expdp system/system@final SCHEMAS=simple DIRECTORY=DATA_PUMP_DIR DUMPFILE=export_simp.dmp LOGFILE=import_simp.log
+
+2) Можно создать файл *.par, в нём указать все необходимые переменные и потом запусть его сделующим образом:
+expdp system/system@final PARFILE=export.par
+
+--------------------------------------------------------------------------------------------------------------------------------
+Я выбрал второй.
+Для экспорта схемы используется команда:
+expdp system/system@final PARFILE=export.par
+Файл export.par приложен.
+
+DIRECTORY=DATA_PUMP_DIR  #Папка, в которую сохранится файл для экспорта
+DUMPFILE=export_simp.dmp #Название файла
+LOGFILE=export_simp.log  #Название лога
+SCHEMAS=simple           #Схема, которая будет экспортироваться
+
+После экспорта можно удалить схему, которую я экспортировал (в моём случае схема называется simple), при помощи команд:
+sqlplus / as sysdba
+SQL> drop user simple cascade;
+
+Теперь схемы нет и её нужно восстановить.
+
+Для импорта схемы  используется команда:
+impdp system/system@final PARFILE=import.par
+Файл import.par приложен.
+
+DIRECTORY=DATA_PUMP_DIR  #Папка, из которой будет браться файл для импорта
+DUMPFILE=export_simp.dmp #Название файла
+LOGFILE=import_simp.log  #Название лога
+SCHEMAS=simple           #Схема, которая импортироваться

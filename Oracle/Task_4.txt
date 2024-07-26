@@ -1,0 +1,9 @@
+--Управление табличными пространствами
+
+--Изменение размера датафайла
+ALTER DATABASE DATAFILE '/u01/app/oracle/oradata/FINAL/admin_tablespace.dbf' RESIZE 100M;
+
+--Добавление нового датафайла
+ALTER TABLESPACE admin_tablespace
+ADD DATAFILE '/u01/app/oracle/oradata/FINAL/admin_tablespace2.dbf' 
+SIZE 100M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;

@@ -1,0 +1,4 @@
+DIRECTORY=DATA_PUMP_DIR
+DUMPFILE=export_simp.dmp
+LOGFILE=import_simp.log
+SCHEMAS=simple
