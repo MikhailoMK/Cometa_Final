@@ -1,13 +1,13 @@
 ---
-- name: Install Docker # Выполнять всё будем на хосте с именем Prod с правами суперпользователя (root), также отключаем автоматический сбор фактов
-  hosts: localhost
+- name: CD # Выполнять всё будем на хосте с именем Prod с правами суперпользователя (root), также отключаем автоматический сбор фактов
+  hosts: ec2_hosts
   gather_facts: no
   become: true
   vars:
-    home: /home/mikhailomk/final_git # Папка, в которую загрузим репозиторий
+    user: ubuntu
+    home: /home/ubuntu/final_git # Папка, в которую загрузим репозиторий
     docker_repo: https://download.docker.com/linux/ubuntu
     docker_gpg_key: https://download.docker.com/linux/ubuntu/gpg
-    github_repo: https://github.com/MikhailoMK/Cometa_Final.git
 
   tasks:
     - name: Install required system packages # Устанавливаем все необходимые зависимости
@@ -38,11 +38,27 @@
         name: docker-ce
         state: latest
 
-    - name: Git checkout # Загрузка самого репозитория
-      ansible.builtin.git:
-        repo: "{{ github_repo }}"
-        dest: "{{ home }}"
+    - name: Create directory
+      file:
+        path: "{{ home }}/"
+        state: directory
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: 0775
 
-    - name: Tear down existing services # Запуск файла docker-compose.yml
-      community.docker.docker_compose_v2:
-        project_src: "{{ home }}/DevOps"
+    - name: Copy docker-compose.yml
+      copy:
+        src: "docker-compose.yml"
+        dest: "{{ home }}/docker-compose.yml"
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        mode: 0644
+
+    - name: Stop services
+      shell: docker-compose -f {{ home }}/docker-compose.yml stop
+
+    - name: Pull images
+      shell: docker-compose -f {{ home }}/docker-compose.yml pull
+
+    - name: Start services
+      shell: docker-compose -f {{ home }}/docker-compose.yml up -d

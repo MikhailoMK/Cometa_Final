@@ -1,7 +1,9 @@
-version: '3.8'
+version: '3.9'
 
 services:
-  flask:
+  api:
+    restart: always
     image: mikhailomk/my-flask-app:latest
+    container_name: my_app
     ports:
-      - "5000:5000"
+      - 7777:7777

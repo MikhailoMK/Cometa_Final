@@ -33,7 +33,19 @@ jobs:
         with:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest
-          context: DevOps/flask
+          context: DevOps
+
+#      - name: Deploy APIService
+ #       uses: dawidd6/action-ansible-playbook@v2
+  #      with:
+   #       playbook: deploy.yml
+    #      directory: DevOps/
+     #     key: ${{secrets.SSH_PRIV_KEY}}
+      #    inventory: |
+       #     [ec2_hosts]
+        #    kartservices.com ansible_ssh_user=${{secrets.SSH_USER}} ansible_become_user=${{secrets.ANSIBLE_BECOME_USER}} #ansible_become_password=${{secrets.ANSIBLE_BECOME_PASSWORD}}
+         # options: |
+          #  --verbose
 
       # Шаг для установки Ansible
 #      - name: Set up Ansible
