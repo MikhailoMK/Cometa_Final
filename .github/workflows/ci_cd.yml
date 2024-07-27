@@ -8,8 +8,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout the files
-        uses: actions/checkout@v2
+      # Шаг для копирования репозитория
+      - name: Checkout
+        uses: actions/checkout@v4
         
       # Шаг для установки QEMU
       - name: Set up QEMU
