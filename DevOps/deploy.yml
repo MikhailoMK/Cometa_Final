@@ -38,7 +38,7 @@
         name: docker-ce
         state: latest
 
-    - name: Create directory
+    - name: Create directory # Создаём папку для docker-compose.yml
       file:
         path: "{{ home }}/"
         state: directory
@@ -46,7 +46,7 @@
         group: "{{ user }}"
         mode: 0775
 
-    - name: Copy docker-compose.yml
+    - name: Copy docker-compose.yml # Копируем docker-compose.yml
       copy:
         src: "docker-compose.yml"
         dest: "{{ home }}/docker-compose.yml"
@@ -54,7 +54,7 @@
         group: "{{ user }}"
         mode: 0644
 
-    - name: Stop services
+    - name: Stop services # В сумме обновляем наш образ
       shell: docker-compose -f {{ home }}/docker-compose.yml stop
 
     - name: Pull images

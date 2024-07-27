@@ -32,20 +32,22 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/my-flask-app:v1.0.${{ github.run_number }}
+            ${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest
           context: DevOps
 
-#      - name: Deploy APIService
- #       uses: dawidd6/action-ansible-playbook@v2
-  #      with:
-   #       playbook: deploy.yml
-    #      directory: DevOps/
-     #     key: ${{secrets.SSH_PRIV_KEY}}
-      #    inventory: |
-       #     [ec2_hosts]
-        #    kartservices.com ansible_ssh_user=${{secrets.SSH_USER}} ansible_become_user=${{secrets.ANSIBLE_BECOME_USER}} #ansible_become_password=${{secrets.ANSIBLE_BECOME_PASSWORD}}
-         # options: |
-          #  --verbose
+      - name: Deploy APIService
+        uses: dawidd6/action-ansible-playbook@v2
+        with:
+          playbook: deploy.yml
+          directory: DevOps/
+          key: ${{secrets.SSH_PRIVATE_KEY}}
+          inventory: |
+            [ec2_hosts]
+            ${{secrets.REMOTE_HOST}} ansible_ssh_user=${{secrets.ANSIBLE_SSH_USER}} ansible_become_user=${{secrets.ANSIBLE_BECOME_USER}}
+          options: |
+            --verbose
 
       # Шаг для установки Ansible
 #      - name: Set up Ansible
