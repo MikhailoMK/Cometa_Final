@@ -37,7 +37,8 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest
           context: DevOps
 
-      - name: Deploy APIService
+      # Шаг для деплоя проекта
+      - name: Deploy with Ansible
         uses: dawidd6/action-ansible-playbook@v2
         with:
           playbook: deploy.yml

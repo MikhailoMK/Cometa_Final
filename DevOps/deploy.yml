@@ -21,6 +21,8 @@
           - virtualenv
           - python3-setuptools
           - python3-docker
+          - docker-ce
+          - docker-compose
         state: latest
 
     - name: Add Docker GPG apt Key # Добавляем GPG ключ, чтобы система доверяла пакетам загружаемым из докера
@@ -32,11 +34,6 @@
       apt_repository:
         repo: "deb {{ docker_repo }} focal stable"
         state: present
-
-    - name: Update apt and install docker-ce # Пакеты для работы с докером
-      apt:
-        name: docker-ce
-        state: latest
 
     - name: Create directory # Создаём папку для docker-compose.yml
       file:
