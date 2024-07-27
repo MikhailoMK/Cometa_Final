@@ -21,8 +21,6 @@
           - virtualenv
           - python3-setuptools
           - python3-docker
-          - docker-ce
-          - docker-compose
         state: latest
 
     - name: Add Docker GPG apt Key # Добавляем GPG ключ, чтобы система доверяла пакетам загружаемым из докера
@@ -34,6 +32,13 @@
       apt_repository:
         repo: "deb {{ docker_repo }} focal stable"
         state: present
+
+    - name: Update apt and install docker-ce
+      apt:
+        pkg:
+          - docker-ce
+          - docker-compose
+        state: latest    
 
     - name: Create directory # Создаём папку для docker-compose.yml
       file:
@@ -52,10 +57,25 @@
         mode: 0644
 
     - name: Stop services # В сумме обновляем наш образ
-      shell: docker-compose -f {{ home }}/docker-compose.yml stop
+      community.docker.docker_compose_v2:
+        project_src: "{{ home }}"
+        state: stopped
 
     - name: Pull images
-      shell: docker-compose -f {{ home }}/docker-compose.yml pull
+      community.docker.docker_compose_v2:
+        project_src: "{{ home }}"
+        state: pulled
 
     - name: Start services
-      shell: docker-compose -f {{ home }}/docker-compose.yml up -d
+      community.docker.docker_compose_v2:
+        project_src: "{{ home }}"
+        state: started    
+
+    #- name: Stop services # В сумме обновляем наш образ
+     # shell: docker-compose -f {{ home }}/docker-compose.yml stop
+
+    #- name: Pull images
+     # shell: docker-compose -f {{ home }}/docker-compose.yml pull
+
+    #- name: Start services
+     # shell: docker-compose -f {{ home }}/docker-compose.yml up -d
