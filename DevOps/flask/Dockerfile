@@ -1,7 +1,6 @@
 FROM python
 RUN pip install Flask
 WORKDIR /root
-COPY index.py .
-COPY static ./static
-COPY templates ./templates
+COPY . /root
+EXPOSE 5000
 CMD ["python", "index.py"]
