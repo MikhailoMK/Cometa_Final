@@ -1,5 +1,7 @@
-services:   
+version: '3.8'
+
+services:
   flask:
-    build: flask
+    image: mikhailomk/my-flask-app:latest
     ports:
       - "5000:5000"
