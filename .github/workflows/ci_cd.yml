@@ -1,0 +1,46 @@
+name: CI/CD
+
+on:
+  push:
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Шаг для установки QEMU
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      # Шаг для установки Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # Шаг для входа в Docker Hub
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # Шаг для сборки и загрузки Docker-образа
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest
+          context: DevOps/flask
+          file: DevOps/flask/Dockerfile
+
+      # Шаг для установки Ansible
+#      - name: Set up Ansible
+ #       run: |
+  #        python -m pip install --upgrade pip
+   #       pip install ansible
+
+#      # Шаг для выполнения Ansible playbook
+ #     - name: Run Ansible playbook
+  #      env:
+   #       ANSIBLE_HOST_KEY_CHECKING: "false"
+    #      ANSIBLE_PRIVATE_KEY: ${{ secrets.ANSIBLE_PRIVATE_KEY }}
+     #   run: ansible-playbook -i DevOps/ansible/inventory DevOps/ansible/deploy.yml
