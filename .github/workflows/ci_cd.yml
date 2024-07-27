@@ -8,6 +8,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout the files
+        uses: actions/checkout@v2
+        
       # Шаг для установки QEMU
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
