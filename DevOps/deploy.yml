@@ -59,17 +59,17 @@
     - name: Stop services # В сумме обновляем наш образ
       community.docker.docker_compose_v2:
         project_src: "{{ home }}"
-        state: stopped
+        state: absent
 
     - name: Pull images
       community.docker.docker_compose_v2:
         project_src: "{{ home }}"
-        state: pulled
+        state: present
 
     - name: Start services
       community.docker.docker_compose_v2:
         project_src: "{{ home }}"
-        state: started    
+        state: present
 
     #- name: Stop services # В сумме обновляем наш образ
      # shell: docker-compose -f {{ home }}/docker-compose.yml stop
