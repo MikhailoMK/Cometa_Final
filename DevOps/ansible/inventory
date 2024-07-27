@@ -1,0 +1,5 @@
+[ec2_hosts]
+Prod ansible_host=
+
+[ec2_hosts:vars]
+ansible_user=ubuntu
