@@ -46,6 +46,6 @@ jobs:
           key: ${{secrets.SSH_PRIVATE_KEY}}
           inventory: |
             [ec2_hosts]
-            ${{secrets.REMOTE_HOST}} ansible_ssh_user=${{secrets.ANSIBLE_SSH_USER}} ansible_become_user=${{secrets.ANSIBLE_BECOME_USER}}
+            ${{secrets.REMOTE_HOST}} ansible_ssh_user=${{secrets.ANSIBLE_SSH_USER}}
           options: |
             --verbose
