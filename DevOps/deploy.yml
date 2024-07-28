@@ -38,7 +38,7 @@
         pkg:
           - docker-ce
           - docker-compose
-        state: latest    
+        state: latest
 
     - name: Create directory # Создаём папку для docker-compose.yml
       file:
@@ -65,24 +65,10 @@
       community.docker.docker_compose_v2:
         project_src: "{{ home }}"
         state: present
-        pull: yes
+        pull: always
 
     - name: Start services # Запускаем сервисы
       community.docker.docker_compose_v2:
         project_src: "{{ home }}"
         state: present
-        up: yes
-
-#    - name: Start services
- #     community.docker.docker_compose_v2:
-  #      project_src: "{{ home }}"
-   #     state: present
-
-#    - name: Stop services # В сумме обновляем наш образ
- #     shell: docker-compose -f {{ home }}/docker-compose.yml stop
-
-#    - name: Pull images
- #     shell: docker-compose -f {{ home }}/docker-compose.yml pull
-
-#    - name: Start services
- #     shell: docker-compose -f {{ home }}/docker-compose.yml up -d
+        recreate: always
