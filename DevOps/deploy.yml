@@ -56,21 +56,33 @@
         group: "{{ user }}"
         mode: 0644
 
-#    - name: Stop services # В сумме обновляем наш образ
- #     community.docker.docker_compose_v2:
-  #      project_src: "{{ home }}"
-   #     state: absent
+    - name: Stop services # Останавливаем сервисы
+      community.docker.docker_compose_v2:
+        project_src: "{{ home }}"
+        state: absent
+
+    - name: Pull images # Обновляем образы
+      community.docker.docker_compose_v2:
+        project_src: "{{ home }}"
+        state: present
+        pull: yes
+
+    - name: Start services # Запускаем сервисы
+      community.docker.docker_compose_v2:
+        project_src: "{{ home }}"
+        state: present
+        up: yes
 
 #    - name: Start services
  #     community.docker.docker_compose_v2:
   #      project_src: "{{ home }}"
    #     state: present
 
-    - name: Stop services # В сумме обновляем наш образ
-      shell: docker-compose -f {{ home }}/docker-compose.yml stop
+#    - name: Stop services # В сумме обновляем наш образ
+ #     shell: docker-compose -f {{ home }}/docker-compose.yml stop
 
-    - name: Pull images
-      shell: docker-compose -f {{ home }}/docker-compose.yml pull
+#    - name: Pull images
+ #     shell: docker-compose -f {{ home }}/docker-compose.yml pull
 
-    - name: Start services
-      shell: docker-compose -f {{ home }}/docker-compose.yml up -d
+#    - name: Start services
+ #     shell: docker-compose -f {{ home }}/docker-compose.yml up -d
