@@ -5,12 +5,12 @@
   become: true
   vars:
     user: ubuntu
-    home: /home/ubuntu/final_git # Папка, в которую загрузим репозиторий
+    home: /home/ubuntu/final_git # Папка, в которую загрузим docker-compose.yml
     docker_repo: https://download.docker.com/linux/ubuntu
     docker_gpg_key: https://download.docker.com/linux/ubuntu/gpg
 
   tasks:
-    - name: Install required system packages # Устанавливаем все необходимые зависимости
+    - name: Install required system packages # Устанавливаем необходимые зависимости
       apt:
         pkg:
           - apt-transport-https
@@ -33,7 +33,7 @@
         repo: "deb {{ docker_repo }} focal stable"
         state: present
 
-    - name: Update apt and install docker-ce
+    - name: Update apt and install docker-ce # Пакеты для работы с докером
       apt:
         pkg:
           - docker-ce
